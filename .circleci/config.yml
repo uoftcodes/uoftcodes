@@ -5,6 +5,8 @@
 version: 2
 jobs:
   build:
+    environment:
+      CC_TEST_REPORTER_ID: ae465252b6955294ed43514fbbfaae3a73f10c8323d47e83361c042f486487c8
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
       - image: circleci/postgres:10.5
@@ -33,8 +35,17 @@ jobs:
       - run: bundle exec rake db:schema:load
 
       - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      - run:
           name: Run tests
-          command: bundle exec rake test
+          command: |
+            ./cc-test-reporter before-build
+            bundle exec rake test
+            ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
 
       - store_test_results:
           path: /tmp/test-results
