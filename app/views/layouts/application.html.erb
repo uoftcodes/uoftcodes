@@ -1,15 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Uoftcodes</title>
+    <title>UofTCodes</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js' %>
   </head>
 
   <body>
-    <%= yield %>
+    <div class="ui menu">
+      <a href="/" class="header item">
+        UofTCodes
+      </a>
+      <a href="/" class="item">
+        Sign in
+      </a>
+    </div>
+
+    <div style="padding: 0 10% 0 10%">
+      <% flash.each do |type, msg| %>
+        <% if type == "notice" %>
+          <div class="ui info message">
+        <% elsif type == "alert" %>
+          <div class="ui negative message">
+        <% else %>
+          <div class="ui info message">
+        <% end %>
+          <i class="close icon"></i>
+          <div class="header">
+              <%= msg %>
+          </div>
+        </div>
+      <% end %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>

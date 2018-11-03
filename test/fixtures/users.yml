@@ -1,0 +1,26 @@
+member:
+  first_name: Joe
+  last_name: Member
+  email: member@uoftcodes.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  user_type: member
+
+lecturer:
+  first_name: Carol
+  last_name: Lecturer
+  email: lecturer@uoftcodes.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  user_type: lecturer
+
+admin:
+  first_name: Bob
+  last_name: Admin
+  email: admin@uoftcodes.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  user_type: admin
