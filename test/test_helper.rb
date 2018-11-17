@@ -9,6 +9,7 @@ require 'rails/test_help'
 
 module ActiveSupport
   class TestCase
+    include ActionMailer::TestHelper
     fixtures :all
   end
 end

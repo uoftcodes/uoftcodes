@@ -37,4 +37,8 @@ group :test do
   gem 'simplecov', require: false
 end
 
+group :production do
+  gem 'timber', '~> 2.6'
+end
+
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
