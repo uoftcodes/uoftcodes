@@ -1,0 +1,48 @@
+<% content_for :page_scripts do %>
+  <script>
+    $( document ).ready(function() {
+      $('#start_time').calendar();
+      $('#end_time').calendar();
+    });
+  </script>
+<% end %>
+
+<%= form_with(model: event, local: true, class: 'ui form') do |form| %>
+  <div class="required field">
+    <%= form.label 'Title' %>
+    <%= form.text_field :title %>
+  </div>
+  <div class="required field">
+    <%= form.label 'Location' %>
+    <%= form.text_field :location %>
+  </div>
+  <div class="required field">
+    <%= form.label 'Description' %>
+    <%= form.text_area :description %>
+  </div>
+  <div class="required field">
+    <%= form.label 'Start time' %>
+    <div class="ui calendar" id="start_time">
+      <div class="ui input left icon">
+        <i class="calendar icon"></i>
+        <%= form.text_field :start_time %>
+      </div>
+    </div>
+  </div>
+  <div class="required field">
+    <%= form.label 'End time' %>
+    <div class="ui calendar" id="end_time">
+      <div class="ui input left icon">
+        <i class="calendar icon"></i>
+        <%= form.text_field :end_time %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <div class="ui label">
+      <i class="check icon"></i>
+      <%= event.approved? ? 'Approved' : 'Pending approval' %>
+    </div>
+  </div>
+  <%= form.submit class: 'ui primary button' %>
+<% end %>

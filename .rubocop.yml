@@ -8,10 +8,13 @@ Style/MixinUsage:
   Enabled: false
 
 Metrics/AbcSize:
-  Max: 30
+  Max: 40
 
 Metrics/MethodLength:
   Max: 30
 
 Metrics/BlockLength:
   Max: 50
+
+Metrics/ClassLength:
+  Max: 200

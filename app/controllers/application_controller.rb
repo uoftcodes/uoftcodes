@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def after_sign_in_path_for(resource_or_scope)
-    login_redirect = session[:login_redirect] || super
+  def after_sign_in_path_for(_resource_or_scope)
+    login_redirect = session[:login_redirect] || '/events'
 
     session.delete(:login_redirect)
 

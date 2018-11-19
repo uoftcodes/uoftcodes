@@ -16,6 +16,15 @@ lecturer:
   confirmation_sent_at: <%= Time.zone.now - 2.hours %>
   user_type: lecturer
 
+lecturer2:
+  first_name: Mark
+  last_name: Lecturer
+  email: lecturer2@uoftcodes.com
+  encrypted_password: <%= User.new.send(:password_digest, 'password') %>
+  confirmed_at: <%= Time.zone.now - 1.hour %>
+  confirmation_sent_at: <%= Time.zone.now - 2.hours %>
+  user_type: lecturer
+
 admin:
   first_name: Bob
   last_name: Admin

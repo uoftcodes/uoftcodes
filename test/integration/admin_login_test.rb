@@ -4,6 +4,7 @@ require 'test_helper'
 
 class AdminLoginTest < ActionDispatch::IntegrationTest
   include Devise::Test::IntegrationHelpers
+
   test 'cannot access admin dashboard without authentication' do
     get rails_admin_path
 

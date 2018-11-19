@@ -1,0 +1,75 @@
+<%= javascript_include_tag 'event_show' %>
+
+<h1>Events</h1>
+
+<% if current_user&.like_lecturer? %>
+  <%= link_to 'New Event', new_event_path, class: 'ui button' %>
+<% end %>
+
+<div class="ui link three doubling stackable cards">
+  <% @events.each do |event| %>
+    <div class="ui card">
+      <a class="content" onclick="showEventModal(<%= event.id %>)">
+        <div class="header ellipsis-overflow">
+          <% unless event.approved? %>
+            <div class="ui label">
+              Pending approval
+            </div>
+          <% end %>
+          <%= event.title %>
+        </div>
+        <div class="description ellipsis-overflow">
+          <div class="ui label">
+            <i class="calendar outline icon"></i>
+            <%= event.formatted_time_range %>
+          </div>
+          <br />
+          <div class="ui label" style="margin: 10px 0;">
+            <i class="map marker alternate icon"></i>
+            <%= event.location %>
+          </div>
+          <br />
+          <%= event.description %>
+        </div>
+      </a>
+      <% if current_user&.like_lecturer? %>
+      <div class="extra content">
+        <% if current_user&.admin? %>
+        <div class="ui three buttons">
+          <%= link_to 'Edit', edit_event_path(event), class: 'ui grey button' %>
+          <% if event.approved? %>
+            <%= link_to 'Unapprove', event_approve_path(event), method: :post,
+              data: { confirm: 'Are you sure you want to unapprove this event?' }, class: 'ui yellow button' %>
+          <% else %>
+            <%= link_to 'Approve', event_approve_path(event), method: :post, class: 'ui green button' %>
+          <% end %>
+          <%= link_to 'Destroy', event, method: :delete,
+            data: { confirm: 'Are you sure you want to delete this event?' }, class: 'ui red button' %>
+        </div>
+        <% elsif event.user == current_user %>
+          <div class="ui two buttons">
+            <%= link_to 'Edit', edit_event_path(event), class: 'ui grey button' %>
+            <%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }, class: 'ui red button' %>
+          </div>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+<div class="ui modal" id="event_modal">
+  <div class="header" id="event_modal_header">Loading....</div>
+  <div class="scrolling content">
+    <div class="ui segment" style="min-height: 100px">
+      <div class="ui active inverted dimmer" id="event_modal_loader">
+        <div class="ui text loader">Loading</div>
+      </div>
+      <div class="ui label" id="event_modal_date_label">
+      </div>
+      <p id="event_modal_content"></p>
+    </div>
+  </div>
+</div>
+
+<br>

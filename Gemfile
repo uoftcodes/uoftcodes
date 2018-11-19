@@ -9,6 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.5.0'
 gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails', '~> 4.3.3'
 gem 'pg', '~> 0.18.4'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.1'
@@ -31,6 +32,9 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'chromedriver-helper'
+  gem 'factory_bot_rails', '~> 4.11.1'
+  gem 'faker', '~> 1.9.1'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
 end

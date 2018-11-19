@@ -9,4 +9,12 @@ class User < ApplicationRecord
 
   enum user_type: { member: 0, lecturer: 1, admin: 2 }
   validates_presence_of :first_name, :last_name
+
+  def like_lecturer?
+    lecturer? || admin?
+  end
+
+  def name
+    first_name + ' ' + last_name
+  end
 end

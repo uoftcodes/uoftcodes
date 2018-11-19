@@ -1,0 +1,9 @@
+<h1 class="ui header">
+  <%= @event.title %>
+</h1>
+<div class="description">
+  <%= @event.description %>
+</div>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>
