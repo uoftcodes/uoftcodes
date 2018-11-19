@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const eventId = parseInt(urlParams.get('eventId'));
+  var urlParams = new URLSearchParams(window.location.search);
+  var eventId = parseInt(urlParams.get('eventId'));
 
   if (!isNaN(eventId)) {
     showEventModal(eventId);
