@@ -1,4 +1,24 @@
 $(document).ready(function() {
+  var events = gon.events;
+
+  console.log(events);
+
+  $('#calendar').fullCalendar({
+    editable: false,
+    themeSystem: 'standard',
+    header: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek,list'
+    },
+    events: events,
+    eventClick: function(calEvent, jsEvent, view) {
+      showEventModal(calEvent.id);
+    }
+  });
+});
+
+$(document).ready(function() {
   var urlParams = new URLSearchParams(window.location.search);
   var eventId = parseInt(urlParams.get('eventId'));
 
@@ -6,6 +26,10 @@ $(document).ready(function() {
     showEventModal(eventId);
   }
 });
+
+function getEvents() {
+
+}
 
 function showEventModal(eventId) {
   $('#event_modal_loader').addClass('active');

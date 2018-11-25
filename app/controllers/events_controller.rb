@@ -55,6 +55,8 @@ class EventsController < ApplicationController
               else
                 Event.where('end_time >= ? AND approved=true', Time.now)
               end
+
+    build_js_events
   end
 
   def show
@@ -87,6 +89,17 @@ class EventsController < ApplicationController
   end
 
   private
+
+  def build_js_events
+    gon.events = @events.to_a.map do |e|
+      {
+        id: e.id,
+        title: e.title,
+        start: e.start_time,
+        end: e.end_time
+      }
+    end
+  end
 
   def find_event_by_id!
     @event = Event.find_by_id(params[:id])
