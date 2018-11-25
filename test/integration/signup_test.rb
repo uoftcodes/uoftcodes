@@ -17,6 +17,16 @@ class SignupTest < ActionDispatch::IntegrationTest
     refute_empty flash
   end
 
+  test 'sign up with a student number' do
+    assert_emails 1 do
+      assert_difference 'User.count' do
+        post user_registration_path, params: { user: build_user_params(student_number: '1234567890') }
+      end
+    end
+
+    assert_equal '1234567890', User.last.student_number
+  end
+
   test 'successful sign up redirects to login' do
     assert_emails 1 do
       assert_difference 'User.count' do

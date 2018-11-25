@@ -12,16 +12,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_104_225_510) do
+ActiveRecord::Schema.define(version: 20_181_125_212_150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'event_registrations', force: :cascade do |t|
-    t.bigint 'events_id'
+    t.bigint 'event_id'
     t.bigint 'user_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['events_id'], name: 'index_event_registrations_on_events_id'
+    t.index %w[event_id user_id], name: 'index_event_registrations_on_event_id_and_user_id', unique: true
+    t.index ['event_id'], name: 'index_event_registrations_on_event_id'
     t.index ['user_id'], name: 'index_event_registrations_on_user_id'
   end
 
@@ -62,6 +63,7 @@ ActiveRecord::Schema.define(version: 20_181_104_225_510) do
     t.string 'last_name', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.string 'student_number'
     t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
