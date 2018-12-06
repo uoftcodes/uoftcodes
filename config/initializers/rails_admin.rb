@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 RailsAdmin.config do |config|
+  config.main_app_name = ['UofTCodes']
+
   config.actions do
     dashboard
     index
@@ -25,6 +27,7 @@ RailsAdmin.config do |config|
       field :password
       field :password_confirmation
       field :user_type
+      field :skip_confirmation, :boolean
     end
   end
 

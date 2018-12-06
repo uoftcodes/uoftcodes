@@ -14,7 +14,12 @@ Metrics/MethodLength:
   Max: 30
 
 Metrics/BlockLength:
+  Exclude:
+    - db/schema.rb
   Max: 50
 
 Metrics/ClassLength:
   Max: 200
+
+Style/DoubleNegation:
+  Enabled: false

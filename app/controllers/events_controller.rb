@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
-  before_action :authorize_only_lecturer, only: %i[new create update edit destroy]
-  before_action :authorize_only_admin, only: %i[approve]
+  before_action :authorize_only_like_lecturer!, only: %i[new create update edit destroy]
+  before_action :authorize_only_admin!, only: %i[approve]
   before_action :authenticate_user!, except: %i[index show]
 
   def new
@@ -109,19 +109,6 @@ class EventsController < ApplicationController
     end
 
     raise ActionController::RoutingError, 'Not Found' if @event.nil?
-  end
-
-  def unauthorized_redirect
-    flash[:alert] = 'You are unauthorized to visit that page.'
-    redirect_to events_url
-  end
-
-  def authorize_only_lecturer
-    unauthorized_redirect unless current_user.like_lecturer?
-  end
-
-  def authorize_only_admin
-    unauthorized_redirect unless current_user.admin?
   end
 
   def event_params
