@@ -12,16 +12,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_126_152_912) do
+ActiveRecord::Schema.define(version: 20_181_209_010_332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
   create_table 'event_registrations', force: :cascade do |t|
-    t.bigint 'events_id'
+    t.bigint 'event_id'
     t.bigint 'user_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
-    t.index ['events_id'], name: 'index_event_registrations_on_events_id'
+    t.index %w[event_id user_id], name: 'index_event_registrations_on_event_id_and_user_id', unique: true
+    t.index ['event_id'], name: 'index_event_registrations_on_event_id'
     t.index ['user_id'], name: 'index_event_registrations_on_user_id'
   end
 
@@ -41,10 +42,10 @@ ActiveRecord::Schema.define(version: 20_181_126_152_912) do
 
   create_table 'lecturer_applications', force: :cascade do |t|
     t.bigint 'user_id'
-    t.binary 'resume', null: false
+    t.text 'resume', null: false
     t.text 'interests', null: false
     t.text 'additional_info'
-    t.boolean 'student', null: false
+    t.boolean 'student'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.integer 'approval_status', default: 0, null: false

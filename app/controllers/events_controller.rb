@@ -15,7 +15,7 @@ class EventsController < ApplicationController
 
     if @event.save
       flash[:info] = 'Event successfully created.'
-      redirect_to events_url
+      redirect_to events_path
     else
       flash.now[:alert] = @event.build_error_message
 
@@ -32,7 +32,7 @@ class EventsController < ApplicationController
 
     if @event.update(event_params)
       flash[:info] = 'Event successfully created.'
-      redirect_to events_url
+      redirect_to events_path
     else
       flash.now[:alert] = @event.build_error_message
 
@@ -85,7 +85,7 @@ class EventsController < ApplicationController
       flash[:alert] = @event.build_error_message
     end
 
-    redirect_to events_url
+    redirect_to events_path
   end
 
   private

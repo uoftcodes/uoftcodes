@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def unauthorized_redirect
     flash[:alert] = 'You are unauthorized to visit that page.'
-    redirect_to events_url
+    redirect_to events_path
   end
 
   def authorize_only_like_lecturer!

@@ -16,39 +16,39 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test '#index returns ok with member signed in' do
     sign_in users(:member)
 
-    get events_url
+    get events_path
     assert_response :success
   end
 
   test '#index does not need sign in' do
-    get events_url
+    get events_path
     assert_response :success
   end
 
   test '#new returns ok with lecturer signed in' do
     sign_in users(:lecturer)
 
-    get new_event_url
+    get new_event_path
     assert_response :success
   end
 
   test '#new redirects with member signed in' do
     sign_in users(:member)
 
-    get new_event_url
-    assert_redirected_to events_url
+    get new_event_path
+    assert_redirected_to events_path
   end
 
   test '#create creates new event for lecturer' do
     sign_in users(:lecturer)
 
     assert_difference('Event.count') do
-      post events_url, params: { event: build_event_params }
+      post events_path, params: { event: build_event_params }
     end
 
     event = Event.last
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
     refute event.approved?
   end
 
@@ -56,12 +56,12 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
 
     assert_difference('Event.count') do
-      post events_url, params: { event: build_event_params }
+      post events_path, params: { event: build_event_params }
     end
 
     event = Event.last
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
     refute event.approved?
   end
 
@@ -69,16 +69,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:member)
 
     assert_no_difference('Event.count') do
-      post events_url, params: { event: build_event_params }
+      post events_path, params: { event: build_event_params }
     end
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   test '#edit loads event for an ID' do
     sign_in users(:admin)
 
-    get edit_event_url(@approved_lecture)
+    get edit_event_path(@approved_lecture)
 
     assert_response :success
   end
@@ -87,26 +87,26 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:lecturer)
 
     assert_raises ActionController::RoutingError do
-      get edit_event_url(@admin_lecture)
+      get edit_event_path(@admin_lecture)
     end
   end
 
   test '#edit member cannot edit event' do
     sign_in users(:member)
 
-    get edit_event_url(@admin_lecture)
+    get edit_event_path(@admin_lecture)
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   test '#update updates event for an ID' do
     sign_in users(:admin)
 
-    patch event_url(@approved_lecture), params: { event: build_event_params(title: 'Testing 123') }
+    patch event_path(@approved_lecture), params: { event: build_event_params(title: 'Testing 123') }
 
     @approved_lecture.reload
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
     assert_equal 'Testing 123', @approved_lecture.title
   end
 
@@ -114,16 +114,16 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:lecturer)
 
     assert_raises ActionController::RoutingError do
-      patch event_url(@admin_lecture), params: { event: build_event_params(title: 'Testing 123') }
+      patch event_path(@admin_lecture), params: { event: build_event_params(title: 'Testing 123') }
     end
   end
 
   test '#update member cannot edit event' do
     sign_in users(:member)
 
-    patch event_url(@approved_lecture), params: { event: build_event_params(title: 'Testing 123') }
+    patch event_path(@approved_lecture), params: { event: build_event_params(title: 'Testing 123') }
 
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   test '#index includes only approved events for members' do
@@ -164,7 +164,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test '#show with approved event' do
     sign_in users(:member)
 
-    get event_url(@approved_lecture)
+    get event_path(@approved_lecture)
 
     assert_response :success
     assert_equal @approved_lecture, assigns(:event)
@@ -173,7 +173,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test '#show with unapproved event can be viewed by creator' do
     sign_in users(:lecturer)
 
-    get event_url(@non_approved_lecture)
+    get event_path(@non_approved_lecture)
 
     assert_response :success
     assert_equal @non_approved_lecture, assigns(:event)
@@ -183,7 +183,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:lecturer2)
 
     assert_raises ActionController::RoutingError do
-      get event_url(@non_approved_lecture)
+      get event_path(@non_approved_lecture)
     end
   end
 
@@ -191,14 +191,14 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:member)
 
     assert_raises ActionController::RoutingError do
-      get event_url(@non_approved_lecture)
+      get event_path(@non_approved_lecture)
     end
   end
 
   test '#show with unapproved event can be viewed by admin' do
     sign_in users(:admin)
 
-    get event_url(@non_approved_lecture)
+    get event_path(@non_approved_lecture)
 
     assert_response :success
     assert_equal @non_approved_lecture, assigns(:event)
@@ -212,7 +212,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @non_approved_lecture.reload
 
     refute @non_approved_lecture.approved?
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   test '#approve cannot be accessed by lecturer' do
@@ -223,7 +223,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @non_approved_lecture.reload
 
     refute @non_approved_lecture.approved?
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   test '#approve can be accessed by admin' do
@@ -234,7 +234,7 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @non_approved_lecture.reload
 
     assert @non_approved_lecture.approved?
-    assert_redirected_to events_url
+    assert_redirected_to events_path
   end
 
   private

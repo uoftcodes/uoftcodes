@@ -3,7 +3,7 @@
 FactoryBot.define do
   factory :lecturer_application do
     association :user, factory: :user, user_type: :member
-    resume { Faker::String.random }
+    resume { Base64.encode64(Faker::String.random) }
     interests { Faker::Lorem.sentence }
     additional_info { Faker::Lorem.sentence }
     student { true }

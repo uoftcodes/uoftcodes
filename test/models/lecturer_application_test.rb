@@ -28,4 +28,11 @@ class LecturerApplicationTest < ActiveSupport::TestCase
     @pending_application.reload
     assert_equal :lecturer, @pending_application.user.user_type.to_sym
   end
+
+  test 'extremely large file is rejected for resume' do
+    @pending_application.resume = 'a' * 1_000_000_000
+
+    refute @pending_application.save
+    refute_empty @pending_application.errors
+  end
 end

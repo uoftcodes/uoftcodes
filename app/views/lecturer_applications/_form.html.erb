@@ -1,0 +1,20 @@
+<%= form_with(model: lecturer_application, local: true, class: 'ui form') do |form| %>
+  <div class="required field">
+    <%= form.label 'Resume' %>
+    <%= form.file_field :resume %>
+  </div>
+  <div class="required field" data-tooltip="Talk about topics in Computer Science you're interested in" data-position="bottom left">
+    <%= form.label 'Interests' %>
+    <%= form.text_area :interests %>
+  </div>
+  <div class="field">
+    <%= form.label 'Additional Information' %>
+    <%= form.text_area :additional_info %>
+  </div>
+  <div class="field">
+    <%= form.label 'Are you currently a student at UofT?' %>
+    <%= form.check_box :student %>
+  </div>
+
+  <%= form.submit 'Submit', class: 'ui primary button' %>
+<% end %>
