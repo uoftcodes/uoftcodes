@@ -1,17 +1,76 @@
 @import "general/general";
-.hero {
+
+/**
+* Resets
+*/
+.homepage {
+  .ui.grid {
+    margin: 0;
+  }
+  .ui.grid+.grid {
+    margin: 0;
+  }
+  .ui.grid>.column:not(.row) {
+    padding: 0;
+  }
+}
+
+/**
+* Hero
+*/
+.homepage .hero {
   margin-top: -14px;
   padding-top: 128px;
   padding-bottom: 128px;
   background-color: $primary-color;
   color: $highlight-color;
 
-  h1 {
+  .content {
+    width: 100%;
+    .logo {
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin-bottom: 0px;
+    }
+    p {
+      margin-top: 12px;
+    }
   }
-  p {
+
+  @media screen and (max-width: 766.9px) {
+    .content {
+      text-align: center;
+      .logo {
+        margin: 0 auto;
+        margin-bottom: 12px;
+      }
+    }
+
+  }
+
+  @media screen and (min-width: 767px) {
+    .content {
+      width: 70%;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .content {
+      width: 65%;
+    }
+  }
+
+  @media screen and (min-width: 1150px) {
+    .content {
+      width: 500px;
+    }
   }
 }
 
+/**
+* Main Content Sections
+*/
 .homepage {
   color: $primary-color;
 
@@ -44,7 +103,10 @@
   }
 }
 
-.faq {
+/**
+* FAQ
+*/
+.homepage .faq {
   background-color: $primary-color;
   color: white;
   h1 {
