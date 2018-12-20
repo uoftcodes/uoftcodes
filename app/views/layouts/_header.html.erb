@@ -1,0 +1,15 @@
+<div class="ui menu attached">
+  <%= link_to root_path, class: 'header item' do %>
+    <%= image_tag "logo_small.jpg", style: 'padding: 5px' %>
+    UofTCodes
+  <% end %>
+  <%= link_to 'Events', events_path, class: 'header item' %>
+
+  <div class="right menu">
+    <% if current_user.nil? %>
+      <%= link_to 'Sign In', new_user_session_path, class: 'item' %>
+    <% else %>
+      <%= link_to current_user.name, '', class: 'item' %>
+    <% end %>
+  </div>
+</div>

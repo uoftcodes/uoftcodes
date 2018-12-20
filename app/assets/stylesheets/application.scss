@@ -14,7 +14,18 @@
  *= require_self
  */
 
+ $uoftcodes-blue-color: #314FBD;
+
 .ellipsis-overflow {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.uoftcodes-blue-text {
+  color: $uoftcodes-blue-color;
+}
+
+.uoftcodes-blue-background {
+  color: #FFFFFF !important;
+  background-color: $uoftcodes-blue-color !important;
 }
