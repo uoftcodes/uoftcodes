@@ -1,24 +1,30 @@
 <div class="homepage">
   <div class="hero">
     <div class="ui grid centered">
-      <div class="twelve wide column tablet computer only">
-        <div class="content">
-          <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
-          <h1> CONNECTING </h1>
-          <h1> THE CS COMMUNITY</h1>
-          <h1> AT UTORONTO </h1>
-          <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
-        </div>
-      </div>
 
-      <!-- On mobile splitting the text looks bad -->
-      <div class="twelve wide column mobile only">
-        <div class="content">
-          <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
-          <h1> CONNECTING THE CS COMMUNITY AT UTORONTO </h1>
-          <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
+        <!-- Desktop hero content -->
+        <div class="twelve wide column computer only">
+          <div class="content">
+              <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
+              <h1> CONNECTING </h1>
+              <h1> THE CS COMMUNITY</h1>
+              <h1> AT UTORONTO </h1>
+              <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
+          </div>
+          <div class="image">
+              <%= image_tag("connected_graph.svg") %>
+          </div>
         </div>
-      </div>
+
+        <!-- On mobile splitting the text looks bad -->
+        <div class="twelve wide column tablet mobile only">
+          <div class="content">
+            <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
+            <h1> CONNECTING THE CS COMMUNITY AT UTORONTO </h1>
+            <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
+          </div>
+        </div>
+
     </div>
   </div>
 

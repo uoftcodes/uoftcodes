@@ -13,6 +13,12 @@
   .ui.grid>.column:not(.row) {
     padding: 0;
   }
+
+  @media screen and (min-width: 1024px) {
+    .what-we-do, .upcoming-events, .sponsor-us {
+      width: 700px;
+    }
+  }
 }
 
 /**
@@ -26,7 +32,7 @@
   color: $highlight-color;
 
   .content {
-    width: 100%;
+    display: inline-block;
     .logo {
       margin-bottom: 12px;
     }
@@ -35,6 +41,16 @@
     }
     p {
       margin-top: 12px;
+    }
+  }
+  .image {
+    display: inline-block;
+
+    img {
+      margin-top: $spacing-unit * 2;
+      margin-left: $spacing-unit * 2;
+      width: 100%;
+      height: auto;
     }
   }
 
@@ -46,12 +62,17 @@
         margin-bottom: 12px;
       }
     }
-
   }
 
   @media screen and (min-width: 767px) {
     .content {
       width: 70%;
+      p {
+        width: 413px;
+      }
+    }
+    .image {
+      width: 28%;
     }
   }
 
@@ -59,11 +80,20 @@
     .content {
       width: 65%;
     }
+    .image {
+      width: 34%;
+    }
   }
 
   @media screen and (min-width: 1150px) {
     .content {
       width: 500px;
+    }
+    .image {
+      img {
+        width: auto;
+        height: auto;
+      }
     }
   }
 }
