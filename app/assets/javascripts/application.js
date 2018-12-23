@@ -14,3 +14,7 @@
 //= require activestorage
 //= require jquery
 //= require jquery_ujs
+
+function closeMessage(element) {
+  $(element).closest('.message').transition('fade');
+}

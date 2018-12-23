@@ -20,6 +20,17 @@ Metrics/BlockLength:
 
 Metrics/ClassLength:
   Max: 200
+  Exclude:
+    - test/**/*.rb
 
 Style/DoubleNegation:
   Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - db/schema.rb
+    - config/initializers/rails_admin.rb
+
+Style/NumericLiterals:
+  Exclude:
+    - 'db/schema.rb'

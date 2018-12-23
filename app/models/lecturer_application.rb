@@ -8,10 +8,6 @@ class LecturerApplication < ApplicationRecord
   enum approval_status: { pending: 0, approved: 1, rejected: 2 }
   after_save :perform_approval_decision
 
-  def build_error_message
-    'You have errors: ' + errors.full_messages.map(&:downcase).join(', ')
-  end
-
   private
 
   MAX_RESUME_SIZE = 10.megabytes

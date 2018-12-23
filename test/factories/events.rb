@@ -6,8 +6,8 @@ FactoryBot.define do
     title { Faker::Lorem.sentence }
     location { Faker::String.random }
     description { Faker::Lorem.paragraph }
-    start_time { Faker::Time.between(1.day.from_now, 2.days.from_now) }
-    end_time { Faker::Time.between(2.days.from_now, 3.days.from_now) }
+    start_time { Faker::Time.between(1.hour.from_now, 2.hours.from_now, :between) }
+    end_time { Faker::Time.between(3.hours.from_now, 4.hours.from_now, :between) }
     approved { true }
   end
 end

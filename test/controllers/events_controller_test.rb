@@ -233,8 +233,54 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
     @non_approved_lecture.reload
 
+    response = JSON.parse(@response.body)
+
     assert @non_approved_lecture.approved?
-    assert_redirected_to events_path
+    assert response['approved']
+    assert_nil response['errors']
+  end
+
+  test '#register cannot be access when not logged in' do
+    assert_no_difference('EventRegistration.count') do
+      post event_register_path(@approved_lecture)
+    end
+  end
+
+  test '#register cannot register for unapproved event' do
+    sign_in users(:admin)
+
+    assert_no_difference('EventRegistration.count') do
+      post event_register_path(@non_approved_lecture)
+    end
+
+    response = JSON.parse(@response.body)
+    refute_nil response['errors']
+  end
+
+  test '#register registers on first call' do
+    sign_in users(:member)
+
+    assert_difference('EventRegistration.count') do
+      post event_register_path(@approved_lecture)
+    end
+
+    response = JSON.parse(@response.body)
+    assert response['registered']
+    assert_nil response['errors']
+  end
+
+  test '#register unregisters when registered' do
+    user = users(:member)
+    sign_in user
+    create(:event_registration, user: user)
+
+    assert_difference('EventRegistration.count') do
+      post event_register_path(@approved_lecture)
+    end
+
+    response = JSON.parse(@response.body)
+    assert response['registered']
+    assert_nil response['errors']
   end
 
   private

@@ -64,28 +64,39 @@ class EventsController < ApplicationController
 
     raise ActionController::RoutingError, 'Not Found' if @event.nil?
 
-    unless @event.approved? || current_user.admin? || current_user == @event.user
+    unless @event.approved? || current_user&.admin? || current_user == @event.user
       raise ActionController::RoutingError, 'Not Found'
     end
 
-    render json: @event
+    render json: build_event_json(@event)
   end
 
   def approve
     @event = Event.find_by_id(params[:event_id])
     @event.approved = !@event.approved?
 
-    if @event.save
-      flash[:info] = if @event.approved
-                       'Event has been approved: ' + @event.title
-                     else
-                       'Event has been unapproved: ' + @event.title
-                     end
-    else
-      flash[:alert] = @event.build_error_message
+    @errors = @event.build_error_message unless @event.save
+
+    render json: { approved: @event.approved, errors: @errors }
+  end
+
+  def register
+    @event = Event.find_by_id(params[:event_id])
+    @event_registration = EventRegistration.find_by(event: @event, user: current_user)
+
+    if @event_registration.nil? # Create new event registration
+      registered = true
+
+      @event_registration = EventRegistration.new(event: @event, user: current_user)
+
+      @errors = @event_registration.build_error_message unless @event_registration.save
+    else # Remove existing event registration
+      registered = false
+
+      @event_registration.destroy!
     end
 
-    redirect_to events_path
+    render json: { registered: registered, errors: @errors }
   end
 
   private
@@ -99,6 +110,19 @@ class EventsController < ApplicationController
         end: e.end_time
       }
     end
+  end
+
+  def build_event_json(event)
+    {
+      event_id: event.id,
+      title: event.title,
+      location: event.location,
+      description: event.description,
+      start_time: event.start_time,
+      end_time: event.end_time,
+      approved: event.approved,
+      registered: current_user.nil? ? nil : !EventRegistration.find_by(user: current_user, event: event).nil?
+    }
   end
 
   def find_event_by_id!

@@ -2,6 +2,7 @@
 
 class Event < ApplicationRecord
   belongs_to :user
+  has_many :event_registration
   validates_presence_of :title, :location, :description, :start_time, :end_time
   validate :end_time_cannot_be_before_start_time, :user_must_be_a_lecturer
 
@@ -27,9 +28,5 @@ class Event < ApplicationRecord
     else
       start_time.strftime('%A, %-d %b %Y %-l:%M %p') + ' - ' + end_time.strftime('%A, %-d %b %Y %-l:%M %p')
     end
-  end
-
-  def build_error_message
-    'You have errors: ' + @event.errors.full_messages.map(&:downcase).join(', ')
   end
 end

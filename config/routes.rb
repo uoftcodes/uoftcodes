@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   resources :events do
     post 'approve', action: :approve
+    post 'register', action: :register
   end
 
   resources :lecturer_applications
