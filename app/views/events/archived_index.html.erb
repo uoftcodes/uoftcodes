@@ -1,0 +1,37 @@
+<% content_for :page_scripts do %>
+  <%= javascript_include_tag 'event_show' %>
+<% end %>
+
+<h1>Archived Events</h1>
+
+<div class="ui link three doubling stackable cards">
+  <% @events.each do |event| %>
+    <div class="ui card">
+      <a class="content" onclick="showEventModal(<%= event.id %>)">
+        <div class="header ellipsis-overflow">
+          <% unless event.approved? %>
+            <div class="ui label">
+              Pending approval
+            </div>
+          <% end %>
+          <%= event.title %>
+        </div>
+        <div class="description ellipsis-overflow">
+          <div class="ui label">
+            <i class="calendar outline icon"></i>
+            <%= event.formatted_time_range %>
+          </div>
+          <br />
+          <div class="ui label" style="margin: 10px 0;">
+            <i class="map marker alternate icon"></i>
+            <%= event.location %>
+          </div>
+          <br />
+          <%= event.description %>
+        </div>
+      </a>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'event_modal', archived: true %>

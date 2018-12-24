@@ -1,16 +1,21 @@
 # frozen_string_literal: true
 
 class ApplicationController < ActionController::Base
+  before_action :store_user_location!, if: :storable_location?
   before_action :authenticate_user!
 
   private
 
-  def after_sign_in_path_for(_resource_or_scope)
-    login_redirect = session[:login_redirect] || '/events'
+  def store_user_location!
+    store_location_for(:user, request.fullpath)
+  end
 
-    session.delete(:login_redirect)
+  def storable_location?
+    request.get? && is_navigational_format? && !devise_controller? && !request.xhr?
+  end
 
-    login_redirect
+  def after_sign_in_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || super
   end
 
   def unauthorized_redirect

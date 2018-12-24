@@ -11,6 +11,8 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     @non_approved_lecture2 = events(:non_approved_lecture_lecturer2)
     @admin_lecture = events(:admin_lecture)
     @past_lecture = events(:past_lecture)
+    @non_approved_past_lecture = create(:event, start_time: 2.hours.ago, end_time: 1.hour.ago,
+                                                approved: false, user: users(:lecturer))
   end
 
   test '#index returns ok with member signed in' do
@@ -159,6 +161,50 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert_includes assigns(:events), @non_approved_lecture
     assert_includes assigns(:events), @non_approved_lecture2
     refute_includes assigns(:events), @past_lecture
+  end
+
+  test '#archived_index includes approved past events for non signed in' do
+    sign_in users(:member)
+
+    get events_archived_path
+
+    assert_response :success
+    assert_includes assigns(:events), @past_lecture
+    refute_includes assigns(:events), @non_approved_past_lecture
+    refute_includes assigns(:events), @approved_lecture
+  end
+
+  test '#archived_index includes approved past events for members' do
+    sign_in users(:member)
+
+    get events_archived_path
+
+    assert_response :success
+    assert_includes assigns(:events), @past_lecture
+    refute_includes assigns(:events), @non_approved_past_lecture
+    refute_includes assigns(:events), @approved_lecture
+  end
+
+  test '#archived_index includes approved past events and their own events for lecturers' do
+    sign_in users(:lecturer)
+
+    get events_archived_path
+
+    assert_response :success
+    assert_includes assigns(:events), @past_lecture
+    assert_includes assigns(:events), @non_approved_past_lecture
+    refute_includes assigns(:events), @approved_lecture
+  end
+
+  test '#archived_index includes all past events for admins' do
+    sign_in users(:admin)
+
+    get events_archived_path
+
+    assert_response :success
+    assert_includes assigns(:events), @past_lecture
+    assert_includes assigns(:events), @non_approved_past_lecture
+    refute_includes assigns(:events), @approved_lecture
   end
 
   test '#show with approved event' do

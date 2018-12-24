@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class EventsController < ApplicationController
+  before_action :authenticate_user!, except: %i[index archived_index show]
   before_action :authorize_only_like_lecturer!, only: %i[new create update edit destroy]
   before_action :authorize_only_admin!, only: %i[approve]
-  before_action :authenticate_user!, except: %i[index show]
 
   def new
     @event = Event.new
@@ -41,11 +41,9 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = if current_user.nil?
-                Event.where('end_time >= ? AND approved=true', Time.now)
-              elsif current_user.admin?
+    @events = if current_user&.admin?
                 Event.where('end_time >= ?', Time.now)
-              elsif current_user.lecturer?
+              elsif current_user&.lecturer?
                 Event.where(
                   '(end_time >= ? AND approved=true) OR (end_time >= ? AND user_id=?)',
                   Time.now,
@@ -57,6 +55,21 @@ class EventsController < ApplicationController
               end
 
     build_js_events
+  end
+
+  def archived_index
+    @events = if current_user&.admin?
+                Event.where('end_time < ?', Time.now)
+              elsif current_user&.lecturer?
+                Event.where(
+                  '(end_time < ? AND approved=true) OR (end_time < ? AND user_id=?)',
+                  Time.now,
+                  Time.now,
+                  current_user.id
+                )
+              else
+                Event.where('end_time < ? AND approved=true', Time.now)
+              end.order(start_time: :desc)
   end
 
   def show

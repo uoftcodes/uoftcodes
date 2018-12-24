@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  get 'events/archived', to: 'events#archived_index'
   resources :events do
     post 'approve', action: :approve
     post 'register', action: :register

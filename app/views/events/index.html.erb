@@ -22,45 +22,6 @@
 
 <div id="calendar"></div>
 
-<div class="ui modal" id="event_modal">
-  <input type="hidden" id="event_id" />
-  <div class="header" id="event_modal_header">Loading....</div>
-  <div class="scrolling content">
-    <div class="ui negative message" id="event_modal_negative_message_div" hidden>
-      <i class="close icon" onclick="closeMessage(this);"></i>
-      <div class="header" id="event_modal_negative_message"></div>
-    </div>
-    <div class="ui success message" id="event_modal_success_message_div" hidden>
-      <i class="close icon" onclick="closeMessage(this);"></i>
-      <div class="header" id="event_modal_success_message"></div>
-    </div>
-    <div class="ui segment" style="min-height: 100px">
-      <div class="ui active inverted dimmer" id="event_modal_loader">
-        <div class="ui text loader">Loading</div>
-      </div>
-      <div class="ui label" id="event_modal_date_label">
-      </div>
-      <p id="event_modal_content"></p>
-    </div>
-  </div>
-  <div class="actions" id="event_modal_actions">
-    <% if current_user.nil? %>
-      Not a member? <%= link_to 'Sign up', new_user_registration_path %> for free.
-    <% end %>
-    <div class="ui buttons">
-      <% if current_user&.admin? %>
-        <div class="ui green button" id="approve_event_button" onclick="approveEvent()">
-          Approve
-        </div>
-        <a href="" class="ui grey button" id="edit_event_button">
-          Edit
-        </a>
-      <% end %>
-      <% unless current_user.nil? %>
-        <div class="ui button" id="register_event_button" onclick="registerEvent()"></div>
-      <% end %>
-    </div>
-  </div>
-</div>
+<%= render 'event_modal', archived: false %>
 
 <br>

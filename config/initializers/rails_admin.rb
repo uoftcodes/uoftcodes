@@ -33,7 +33,7 @@ RailsAdmin.config do |config|
 
   config.authorize_with do
     if current_user.nil?
-      session[:login_redirect] = '/admin'
+      store_location_for(:user, request.fullpath)
       redirect_to '/users/sign_in'
     elsif !current_user.admin?
       flash[:notice] = 'You do not have the permissions to view this page.'
