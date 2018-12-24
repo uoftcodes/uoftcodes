@@ -9,7 +9,20 @@
     <% if current_user.nil? %>
       <%= link_to 'Sign In', new_user_session_path, class: 'item' %>
     <% else %>
-      <%= link_to current_user.name, '', class: 'item' %>
+      <div class="ui dropdown pointing item">
+        Hi, <%= current_user.name %>
+        <i class="dropdown icon"></i>
+        <div class="menu inverted">
+          <%= link_to edit_user_registration_path, class: 'item' do %>
+            <i class="cog icon"></i>
+            Settings
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete, class: 'item', 'data-color': 'red'  do %>
+            <i class="sign-out icon"></i>
+            Logout
+          <% end %>
+        </div>
+      </div>
     <% end %>
   </div>
 </div>

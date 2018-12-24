@@ -15,6 +15,19 @@
 //= require jquery
 //= require jquery_ujs
 
+// $(document).ready(function() {
+//   $('.ui.dropdown').dropdown();
+// });
+
+$(document).ready(function() {
+  $('.ui.menu .ui.dropdown').dropdown({
+    on: 'hover'
+  });
+
+  $('.ui.menu a.item').on('click', function() {});
+});
+
+
 function closeMessage(element) {
   $(element).closest('.message').transition('fade');
 }
