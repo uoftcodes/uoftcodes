@@ -7,6 +7,7 @@ jobs:
   build:
     environment:
       CC_TEST_REPORTER_ID: ae465252b6955294ed43514fbbfaae3a73f10c8323d47e83361c042f486487c8
+      CI_SUITE: true
     docker:
       - image: circleci/ruby:2.5.1-node-browsers
       - image: circleci/postgres:10.5
@@ -27,6 +28,16 @@ jobs:
             bundle install --jobs=4 --retry=3 --path vendor/bundle
             gem install rubocop
 
+      - run:
+          name: Download Selenium
+          command: |
+            curl -O http://selenium-release.storage.googleapis.com/3.141/selenium-server-standalone-3.141.59.jar
+      - run:
+          name: Start Selenium
+          command: |
+            java -jar selenium-server-standalone-3.141.59.jar -port 4445
+          background: true
+
       - save_cache:
           paths:
             - ./vendor/bundle
@@ -45,7 +56,7 @@ jobs:
           name: Run tests
           command: |
             ./cc-test-reporter before-build
-            bundle exec rake test
+            bundle exec rake test:system test
             ./cc-test-reporter after-build --coverage-input-type simplecov --exit-code $?
 
       - run:

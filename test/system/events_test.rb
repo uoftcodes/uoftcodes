@@ -3,41 +3,79 @@
 require 'application_system_test_case'
 
 class EventsTest < ApplicationSystemTestCase
+  include Devise::Test::IntegrationHelpers
+
   setup do
-    @event = events(:one)
+    @event = create(:event,
+                    title: Faker::Lorem.sentence,
+                    description: Faker::Lorem.paragraph,
+                    approved: true)
+
+    Capybara.current_driver = Capybara.javascript_driver
   end
 
-  test 'visiting the index' do
-    visit events_url
-    assert_selector 'h1', text: 'Events'
+  test 'viewing events when not signed in' do
+    visit events_path
+
+    find('*', text: /\A#{@event.title}\z/).click
+
+    assert_text(:visible, @event.title)
+    assert_text(:visible, @event.description)
   end
 
-  test 'creating a Event' do
-    visit events_url
-    click_on 'New Event'
+  test 'viewing events when signed in as member' do
+    sign_in create(:user, user_type: :member)
 
-    click_on 'Create Event'
+    visit events_path
 
-    assert_text 'Event was successfully created'
-    click_on 'Back'
+    find('*', text: /\A#{@event.title}\z/).click
+
+    assert_text(:visible, @event.title)
+    assert_text(:visible, @event.description)
+
+    register_button = page.all('#register_event_button')[0]
+    assert register_button.visible?
+    assert_equal 'Register', register_button.text
   end
 
-  test 'updating a Event' do
-    visit events_url
-    click_on 'Edit', match: :first
+  test 'registering and unregistering to event when signed in as member' do
+    sign_in create(:user, user_type: :member)
 
-    click_on 'Update Event'
+    visit events_path
 
-    assert_text 'Event was successfully updated'
-    click_on 'Back'
+    find('*', text: /\A#{@event.title}\z/).click
+
+    register_button = page.all('#register_event_button')[0]
+    assert_equal 'Register', register_button.text
+
+    register_button.click
+    wait_for_ajax
+    assert_equal 'Unregister', register_button.text
+
+    register_button.click
+    wait_for_ajax
+    assert_equal 'Register', register_button.text
   end
 
-  test 'destroying a Event' do
-    visit events_url
-    page.accept_confirm do
-      click_on 'Destroy', match: :first
+  test 'approving and unapproving event when signed in as admin' do
+    sign_in create(:user, user_type: :admin)
+
+    visit events_path
+
+    find('*', text: /\A#{@event.title}\z/).click
+    approve_button = page.all('#approve_event_button')[0]
+    assert_equal 'Unapprove', approve_button.text
+
+    page.accept_alert do
+      approve_button.click
     end
+    wait_for_ajax
+    assert_equal 'Approve', approve_button.text
 
-    assert_text 'Event was successfully destroyed'
+    page.accept_alert do
+      approve_button.click
+    end
+    wait_for_ajax
+    assert_equal 'Unapprove', approve_button.text
   end
 end

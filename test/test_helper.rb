@@ -14,3 +14,25 @@ module ActiveSupport
     fixtures :all
   end
 end
+
+require 'capybara/rails'
+Capybara.register_driver :selenium_remote_chrome do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: 'http://localhost:4445/wd/hub',
+    desired_capabilities: :chrome
+  )
+end
+
+Capybara.register_driver :selenium_chrome_ci do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: 'http://localhost:4445/wd/hub',
+    desired_capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w[headless disable-gpu] }
+    )
+  )
+end
+Capybara.javascript_driver = ENV['CI_SUITE'] ? :selenium_chrome_ci : :selenium_remote_chrome
