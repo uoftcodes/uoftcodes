@@ -1,7 +1,6 @@
 <div class="homepage">
   <div class="hero">
     <div class="ui grid centered">
-
         <!-- Desktop hero content -->
         <div class="twelve wide column computer only">
           <div class="content">
@@ -46,7 +45,11 @@
       <section class="upcoming-events">
         <div class="visual-anchor"></div>
         <h2> Upcoming Events </h2>
+        <% if @events.length == 0 %>
+          <p>We are planning events for you in the future, stay tuned!</p>
+        <% else %>
 
+        <% end %>
       </section>
 
       <section class="sponsor-us">
