@@ -59,3 +59,11 @@ section {
     color: white;
   }
 }
+
+.ui.info.message, .ui.negative.message {
+  /*
+  This is needed so that the alerts don't go over
+  the content of the page.
+   */
+  margin-bottom: 28px;
+}
