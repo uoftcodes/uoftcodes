@@ -1,0 +1,39 @@
+$spacing-unit: 16px;
+$highlight-color: #FFB4DC;
+$primary-color: #556BBD;
+$background-color: #F7F5F6;
+
+* {
+  font-family: 'Arvo', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F7F5F6;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1, h2 {
+  font-size: $spacing-unit * 3;
+  font-weight: 900;
+}
+
+h3 {
+  font-size: $spacing-unit * 1.5;
+}
+
+p {
+  font-size: $spacing-unit * 1.25;
+  line-height: 1.5;
+}
+
+section {
+  padding-top: $spacing-unit * 4;
+  padding-bottom: $spacing-unit * 4;
+}
