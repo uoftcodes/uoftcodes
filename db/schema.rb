@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,44 +12,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_09_010332) do
-
+ActiveRecord::Schema.define(version: 20_181_209_010_332) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "event_registrations", force: :cascade do |t|
-    t.bigint "events_id"
-    t.bigint "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["events_id"], name: "index_event_registrations_on_events_id"
-    t.index ["user_id"], name: "index_event_registrations_on_user_id"
+  create_table 'event_registrations', force: :cascade do |t|
+    t.bigint 'events_id'
+    t.bigint 'user_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['events_id'], name: 'index_event_registrations_on_events_id'
+    t.index ['user_id'], name: 'index_event_registrations_on_user_id'
   end
 
-  create_table "events", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "title", null: false
-    t.string "location", null: false
-    t.binary "banner"
-    t.text "description", null: false
-    t.datetime "start_time", null: false
-    t.datetime "end_time", null: false
-    t.boolean "approved", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_events_on_user_id"
+  create_table 'events', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.string 'title', null: false
+    t.string 'location', null: false
+    t.binary 'banner'
+    t.text 'description', null: false
+    t.datetime 'start_time', null: false
+    t.datetime 'end_time', null: false
+    t.boolean 'approved', default: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['user_id'], name: 'index_events_on_user_id'
   end
 
-  create_table "lecturer_applications", force: :cascade do |t|
-    t.bigint "user_id"
-    t.text "resume", null: false
-    t.text "interests", null: false
-    t.text "additional_info"
-    t.boolean "student"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "approval_status", default: 0, null: false
-    t.index ["user_id"], name: "index_lecturer_applications_on_user_id"
+  create_table 'lecturer_applications', force: :cascade do |t|
+    t.bigint 'user_id'
+    t.text 'resume', null: false
+    t.text 'interests', null: false
+    t.text 'additional_info'
+    t.boolean 'student'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'approval_status', default: 0, null: false
+    t.index ['user_id'], name: 'index_lecturer_applications_on_user_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -82,5 +83,4 @@ ActiveRecord::Schema.define(version: 2018_12_09_010332) do
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
     t.index ['unlock_token'], name: 'index_users_on_unlock_token', unique: true
   end
-
 end
