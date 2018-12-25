@@ -71,6 +71,33 @@
     </div>
   </div>
   <div class="ui bottom attached tab segment" data-tab="communications">
-    Third
+    You are subscribed to receive these emails:
+
+    <br />
+
+    <div class="ui checkbox" data-tooltip="When you register to a new event" data-variation="wide">
+      <%= f.check_box :event_registration_email %>
+      <%= f.label :event_registration_email %>
+    </div>
+
+    <br /><br />
+
+    <div class="ui checkbox" data-tooltip="Reminder of registered upcoming events" data-variation="wide">
+      <%= f.check_box :event_reminder_email %>
+      <%= f.label :event_reminder_email %>
+    </div>
+
+    <br /><br />
+
+    <div class="ui checkbox" data-tooltip="When a new event is added" data-variation="wide">
+      <%= f.check_box :event_creation_email %>
+      <%= f.label :event_creation_email %>
+    </div>
+
+    <br /><br />
+
+    <div class="actions">
+      <%= f.submit "Update", class: 'ui green button' %>
+    </div>
   </div>
 <% end %>
