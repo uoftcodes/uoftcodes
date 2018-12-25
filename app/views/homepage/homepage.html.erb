@@ -45,10 +45,11 @@
       <section class="upcoming-events">
         <div class="visual-anchor"></div>
         <h2> Upcoming Events </h2>
-        <% if @events.length == 0 %>
-          <p>We are planning events for you in the future, stay tuned!</p>
-        <% else %>
-
+        <% @events.each do |event| %>
+          Title: <%= event.title %>
+          Description: <%= event.description %>
+          Start time: <%= event.start_time %>
+          End time: <%= event.end_time %>
         <% end %>
       </section>
 
