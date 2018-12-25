@@ -10,9 +10,9 @@ $(document).ready(function() {
     header: {
       left: 'prev,next today',
       center: 'title',
-      right: 'month,agendaWeek,listMonth'
+      right: 'month,agendaWeek,listYear'
     },
-    defaultView: isMobile ? 'listMonth' : 'month',
+    defaultView: isMobile ? 'listYear' : 'month',
     events: events,
     eventClick: function(calEvent, jsEvent, view) {
       showEventModal(calEvent.id);

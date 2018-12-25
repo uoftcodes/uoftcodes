@@ -14,19 +14,16 @@ class Event < ApplicationRecord
     errors.add(:user, 'must be a lecturer') unless user.nil? || user.like_lecturer?
   end
 
-  def formatted_time_range
+  def formatted_time_range(delimiter = '-')
     # If in the same year as the current time, omit the year
     if end_time.year == Time.now.year
-      # If the start and end are on the same day, omit the date on end time
-      if start_time.to_date == end_time.to_date
-        start_time.strftime('%A, %-d %b %-l:%M %p') + ' - ' + end_time.strftime('%-l:%M %p')
-      else
-        start_time.strftime('%A, %-d %b %-l:%M %p') + ' - ' + end_time.strftime('%A, %-d %b %-l:%M %p')
-      end
-    elsif start_time.to_date == end_time.to_date # If the start and end are on the same day, omit the date on end time
-      start_time.strftime('%A, %-d %b %Y %-l:%M %p') + ' - ' + end_time.strftime('%-l:%M %p')
+      start_time.strftime('%A, %-d %b %-l:%M %p') + ' ' + delimiter + ' ' +
+        (start_time.to_date == end_time.to_date ?
+          end_time.strftime('%-l:%M %p') : end_time.strftime('%A, %-d %b %-l:%M %p'))
     else
-      start_time.strftime('%A, %-d %b %Y %-l:%M %p') + ' - ' + end_time.strftime('%A, %-d %b %Y %-l:%M %p')
+      start_time.strftime('%A, %-d %b %Y %-l:%M %p') + ' ' + delimiter + ' ' +
+        (start_time.to_date == end_time.to_date ?
+          end_time.strftime('%-l:%M %p') : end_time.strftime('%A, %-d %b %Y %-l:%M %p'))
     end
   end
 end

@@ -1,0 +1,22 @@
+<container class="body-border">
+  <row>
+    <columns>
+      <spacer size="16"></spacer>
+
+      <h4>You're unregistered from the event 😢</h4>
+
+      <hr />
+
+      <p>
+        Hi <%= @user.first_name %>!
+      </p>
+
+      <p>
+        You have been unregistered from the event
+        <%= link_to @event.title, "#{events_url}?eventId=#{@event.id}" %>.
+      </p>
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+</container>

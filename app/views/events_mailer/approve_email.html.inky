@@ -1,0 +1,22 @@
+<container class="body-border">
+  <row>
+    <columns>
+      <spacer size="16"></spacer>
+
+      <h4>Your event has been approved! 🎉</h4>
+
+      <hr />
+
+      <p>
+        Hi <%= @user.first_name %>!
+      </p>
+
+      <p>
+        Your event <%= link_to @event.title, "#{events_url}?eventId=#{@event.id}" %>
+        has been approved.
+      </p>
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+</container>

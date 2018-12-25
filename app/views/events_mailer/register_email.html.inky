@@ -1,0 +1,23 @@
+<container class="body-border">
+  <row>
+    <columns>
+      <spacer size="16"></spacer>
+
+      <h4>We look forward to seeing you at the event!</h4>
+
+      <hr />
+
+      <p>
+        Hi <%= @user.first_name %>!
+      </p>
+
+      <p>
+        You have been registered for the event
+        <%= link_to @event.title, "#{events_url}?eventId=#{@event.id}" %>
+        on <%= @event.formatted_time_range('to') %>.
+      </p>
+    </columns>
+  </row>
+
+  <spacer size="16"></spacer>
+</container>
