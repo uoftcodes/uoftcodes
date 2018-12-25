@@ -9,5 +9,8 @@ FactoryBot.define do
     confirmed_at { Faker::Time.between(2.days.ago, Date.today) }
     confirmation_sent_at { Faker::Time.between(3.days.ago, 2.days.ago) }
     user_type { :member }
+    event_registration_email { true }
+    event_reminder_email { true }
+    event_creation_email { true }
   end
 end

@@ -288,7 +288,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
 
   test '#register cannot be access when not logged in' do
     assert_no_difference('EventRegistration.count') do
-      post event_register_path(@approved_lecture)
+      assert_no_emails do
+        perform_enqueued_jobs do
+          post event_register_path(@approved_lecture)
+        end
+      end
     end
   end
 
@@ -296,7 +300,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:admin)
 
     assert_no_difference('EventRegistration.count') do
-      post event_register_path(@non_approved_lecture)
+      assert_no_emails do
+        perform_enqueued_jobs do
+          post event_register_path(@non_approved_lecture)
+        end
+      end
     end
 
     response = JSON.parse(@response.body)
@@ -307,7 +315,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     sign_in users(:member)
 
     assert_difference('EventRegistration.count') do
-      post event_register_path(@approved_lecture)
+      assert_emails 1 do
+        perform_enqueued_jobs do
+          post event_register_path(@approved_lecture)
+        end
+      end
     end
 
     response = JSON.parse(@response.body)
@@ -321,7 +333,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     create(:event_registration, user: user)
 
     assert_difference('EventRegistration.count') do
-      post event_register_path(@approved_lecture)
+      assert_emails 1 do
+        perform_enqueued_jobs do
+          post event_register_path(@approved_lecture)
+        end
+      end
     end
 
     response = JSON.parse(@response.body)
