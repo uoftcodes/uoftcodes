@@ -28,6 +28,22 @@ h3 {
   font-size: $spacing-unit * 1.5;
 }
 
+@media screen and (max-width: 425px) {
+  h1, h2 {
+    font-size: $spacing-unit * 2.5;
+  }
+
+  h3 {
+    font-size: $spacing-unit * 1.25;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  h1, h2 {
+    font-size: $spacing-unit * 2;
+  }
+}
+
 p {
   font-size: $spacing-unit * 1.25;
   line-height: 1.5;
