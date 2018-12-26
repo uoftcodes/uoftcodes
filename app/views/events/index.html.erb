@@ -11,17 +11,20 @@
     }
   </style>
 <% end %>
+<div class="ui grid centered">
+  <div class="fourteen wide column">
+    <h1>Events</h1>
 
-<h1>Events</h1>
+    <% if current_user&.like_lecturer? %>
+      <%= link_to 'New Event', new_event_path, class: 'ui primary button' %>
+      <br />
+      <br />
+    <% end %>
 
-<% if current_user&.like_lecturer? %>
-  <%= link_to 'New Event', new_event_path, class: 'ui primary button' %>
-  <br />
-  <br />
-<% end %>
+    <div id="calendar"></div>
 
-<div id="calendar"></div>
+    <%= render 'event_modal', archived: false %>
 
-<%= render 'event_modal', archived: false %>
-
-<br>
+    <br>
+  </div>
+</div>
