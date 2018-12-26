@@ -12,6 +12,7 @@
     <%= Gon::Base.render_data %>
     <%= stylesheet_link_tag    'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css' %>
     <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= stylesheet_link_tag    'https://fonts.googleapis.com/css?family=Arvo|Poppins:700,900' %>
     <%= javascript_include_tag 'application' %>
     <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js' %>
     <%= javascript_include_tag 'https://cdn.rawgit.com/mdehoog/Semantic-UI-Calendar/76959c6f7d33a527b49be76789e984a0a407350b/dist/calendar.min.js' %>
@@ -21,7 +22,7 @@
   <body>
     <%= render 'layouts/header' %>
 
-    <div style="padding: 0 10% 0 10%">
+    <div style="padding: 0 8px 0 8px">
       <% flash.each do |type, msg| %>
         <% if type == "notice" %>
           <div class="ui info message">
@@ -36,8 +37,8 @@
           </div>
         </div>
       <% end %>
-
-      <%= yield %>
     </div>
+
+    <%= yield %>
   </body>
 </html>

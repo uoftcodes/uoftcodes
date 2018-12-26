@@ -1,1 +1,96 @@
-Welcome to UofTCodes!
+<div class="homepage">
+  <div class="hero">
+    <div class="ui grid centered">
+        <!-- Desktop hero content -->
+        <div class="twelve wide column computer only">
+          <div class="content">
+              <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
+              <h1> CONNECTING </h1>
+              <h1> THE CS COMMUNITY</h1>
+              <h1> AT UTORONTO </h1>
+              <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
+          </div>
+          <div class="image">
+              <%= image_tag("connected_graph.svg") %>
+          </div>
+        </div>
+
+        <!-- On mobile splitting the text looks bad -->
+        <div class="twelve wide column tablet mobile only">
+          <div class="content">
+            <%= image_tag("pink_logo.svg", alt: "Uoft Codes", class: "logo") %>
+            <h1> CONNECTING THE CS COMMUNITY AT UTORONTO </h1>
+            <p>Anybody with a passion for computer science (engineers, writers, anyone) is welcome</p>
+          </div>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="ui centered column grid">
+    <div class="twelve wide column">
+      <section class="what-we-do">
+        <div class="visual-anchor"></div>
+        <h2> What do we do? </h2>
+        <div class="subsection">
+          <h3> Events </h3>
+          <p>Resume workshops, practice interviews, project sharing, meetups/socials.</p>
+        </div>
+        <div class="subsection">
+          <h3> Talks </h3>
+          <p>We get students from the computer science community to talk about CS, interships and more!</p>
+        </div>
+      </section>
+
+      <section class="upcoming-events">
+        <div class="visual-anchor"></div>
+        <h2> Upcoming Events </h2>
+        <% if @events.length == 0 %>
+          <p>We are planning events for you in the future, stay tuned!</p>
+        <% else %>
+          <% @events.each do |event| %>
+          <div class="subsection">
+            <h3> <%= event.title %> </h3>
+            <p>
+                <i class="calendar icon"></i> <%= event.start_time.strftime("%B %d, %Y") %>
+                <br/>
+                <i class="clock icon"></i> <%= event.start_time.strftime("%I:%M %p") %>
+                    - <%= event.end_time.strftime("%I:%M %p") %>
+                <br/>
+                <i class="map marker icon"></i> <%= event.location %>
+            </p>
+            <p> <%= event.description %> </p>
+          </div>
+          <% end %>
+        <% end %>
+      </section>
+
+      <section class="sponsor-us">
+        <div class="visual-anchor"></div>
+        <h2> Sponsor Us </h2>
+        <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut iaculis felis, eu rhoncus sapien.
+              Maecenas porttitor tempor fringilla. Phasellus sed tempus ante. </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSckJ4OXFHC3yPTvp0HRsGvcciI4scV-JIDWgl26SZbhOQpNjw/viewform?usp=sf_link"
+           target="_blank" class="button">
+          Get In Touch
+        </a>
+      </section>
+    </div>
+  </div>
+
+  <section class="ui grid centered faq">
+    <div class="twelve wide column">
+        <h1> FAQ </h1>
+        <div class="qa">
+          <h3> I’m not a computer science student, can I come to your events? </h3>
+          <p> Of course! Any student with an interest in computer science is welcome. </p>
+        </div>
+
+        <div class="qa">
+          <h3> How can I get invovled with Uoft Codes? </h3>
+          <p> We will be posting applications soon, so stay updated! </p>
+        </div>
+    </div>
+  </section>
+
+</div>

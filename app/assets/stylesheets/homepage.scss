@@ -1,0 +1,159 @@
+@import "general/general";
+
+/**
+* Resets
+*/
+.homepage {
+  .ui.grid {
+    margin: 0;
+  }
+  .ui.grid+.grid {
+    margin: 0;
+  }
+  .ui.grid>.column:not(.row) {
+    padding: 0;
+  }
+
+  @media screen and (min-width: 1024px) {
+    .what-we-do, .upcoming-events, .sponsor-us {
+      width: 700px;
+    }
+  }
+}
+
+/**
+* Hero
+*/
+.homepage .hero {
+  margin-top: -14px;
+  padding-top: 128px;
+  padding-bottom: 128px;
+  background-color: $primary-color;
+  color: $highlight-color;
+
+  .content {
+    display: inline-block;
+    .logo {
+      margin-bottom: 12px;
+    }
+    h1 {
+      margin-bottom: 0px;
+    }
+    p {
+      margin-top: 12px;
+    }
+  }
+  .image {
+    display: inline-block;
+
+    img {
+      margin-top: $spacing-unit * 2;
+      margin-left: $spacing-unit * 2;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  @media screen and (max-width: 766.9px) {
+    .content {
+      text-align: center;
+      .logo {
+        margin: 0 auto;
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  @media screen and (min-width: 767px) {
+    .content {
+      width: 70%;
+      p {
+        width: 413px;
+      }
+    }
+    .image {
+      width: 28%;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    .content {
+      width: 65%;
+    }
+    .image {
+      width: 34%;
+    }
+  }
+
+  @media screen and (min-width: 1150px) {
+    .content {
+      width: 500px;
+    }
+    .image {
+      img {
+        width: auto;
+        height: auto;
+      }
+    }
+  }
+}
+
+/**
+* Main Content Sections
+*/
+.homepage {
+  color: $primary-color;
+
+  .visual-anchor {
+    width: 48px;
+    height: 12px;
+    background-color: $primary-color;
+  }
+
+  section:first-child {
+    padding-top: 128px;
+  }
+
+  section:last-child {
+    padding-bottom: 128px;
+  }
+
+  section {
+    h2 {
+      margin-top: $spacing-unit * 0.5;
+      margin-bottom: $spacing-unit * 1.5;
+    }
+    h3 {
+      margin-bottom: 0;
+    }
+  }
+
+  .subsection {
+    margin-bottom: $spacing-unit * 2;
+  }
+}
+
+.homepage .sponsor-us {
+  p {
+    margin-bottom: $spacing-unit * 2.5;
+  }
+}
+
+/**
+* FAQ
+*/
+.homepage .faq {
+  background-color: $primary-color;
+  color: white;
+  h1 {
+    padding-top: $spacing-unit * 4;
+    padding-bottom: $spacing-unit * 4;
+  }
+
+  .qa {
+    margin-bottom: $spacing-unit * 4;
+    h3 {
+      margin-bottom: $spacing-unit;
+    }
+  }
+}

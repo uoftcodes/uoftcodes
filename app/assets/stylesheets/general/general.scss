@@ -1,0 +1,85 @@
+$spacing-unit: 16px;
+$highlight-color: #FFB4DC;
+$primary-color: #556BBD;
+$background-color: #F7F5F6;
+
+* {
+  font-family: 'Arvo', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #F7F5F6;
+}
+
+h1, h2, h3 {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1, h2 {
+  font-size: $spacing-unit * 3;
+  font-weight: 900;
+}
+
+h3 {
+  font-size: $spacing-unit * 1.5;
+}
+
+@media screen and (max-width: 425px) {
+  h1, h2 {
+    font-size: $spacing-unit * 2.5;
+  }
+
+  h3 {
+    font-size: $spacing-unit * 1.25;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  h1, h2 {
+    font-size: $spacing-unit * 2;
+  }
+}
+
+p {
+  font-size: $spacing-unit * 1.25;
+  line-height: 1.5;
+}
+
+section {
+  padding-top: $spacing-unit * 4;
+  padding-bottom: $spacing-unit * 4;
+}
+
+.button {
+  background-color: $primary-color;
+  padding-top: $spacing-unit;
+  padding-bottom: $spacing-unit;
+  padding-left: $spacing-unit * 2;
+  padding-right: $spacing-unit * 2;
+  color: white;
+  font-size: $spacing-unit * 1.25;
+}
+.button:hover {
+  color: white;
+}
+
+.ui.menu {
+  background-color: $primary-color;
+  border-radius: 0;
+  border: none;
+  .item {
+    color: white;
+  }
+}
+
+.ui.info.message, .ui.negative.message {
+  /*
+  This is needed so that the alerts don't go over
+  the content of the page.
+   */
+  margin-bottom: 28px;
+}
