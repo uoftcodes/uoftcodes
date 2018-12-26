@@ -13,7 +13,7 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
   end
 
   test 'user with member permissions cannot access admin dashboard' do
-    sign_in users(:member)
+    sign_in create(:user)
 
     get rails_admin_path
 
@@ -22,7 +22,7 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
   end
 
   test 'user with lecturer permissions cannot access admin dashboard' do
-    sign_in users(:lecturer)
+    sign_in create(:user, user_type: :lecturer)
 
     get rails_admin_path
 
@@ -31,7 +31,7 @@ class AdminLoginTest < ActionDispatch::IntegrationTest
   end
 
   test 'user with admin permissions can access admin dashboard' do
-    sign_in users(:admin)
+    sign_in create(:user, user_type: :admin)
 
     get rails_admin_path
 

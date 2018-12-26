@@ -11,7 +11,6 @@ module ActiveSupport
   class TestCase
     include ActionMailer::TestHelper
     include FactoryBot::Syntax::Methods
-    fixtures :all
   end
 end
 

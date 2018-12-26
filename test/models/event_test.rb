@@ -4,7 +4,7 @@ require 'test_helper'
 
 class EventTest < ActiveSupport::TestCase
   setup do
-    @event = events(:approved_lecture)
+    @event = create(:event, approved: true)
   end
 
   test 'validation fails for a event with end time before start time' do
@@ -17,7 +17,7 @@ class EventTest < ActiveSupport::TestCase
   end
 
   test 'validation fails for a event where the user is not a lecturer' do
-    @event.user = users(:member)
+    @event.user = create(:user)
 
     assert_raises ActiveRecord::RecordInvalid do
       @event.save!
