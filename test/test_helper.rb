@@ -11,6 +11,10 @@ module ActiveSupport
   class TestCase
     include ActionMailer::TestHelper
     include FactoryBot::Syntax::Methods
+
+    setup do
+      ActionMailer::Base.deliveries.clear
+    end
   end
 end
 

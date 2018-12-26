@@ -276,7 +276,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
   test '#approve can be accessed by admin' do
     sign_in @admin
 
-    post event_approve_path(@non_approved_lecture)
+    assert_emails User.count + 1 do
+      perform_enqueued_jobs do
+        post event_approve_path(@non_approved_lecture)
+      end
+    end
 
     @non_approved_lecture.reload
 
@@ -285,6 +289,11 @@ class EventsControllerTest < ActionDispatch::IntegrationTest
     assert @non_approved_lecture.approved?
     assert response['approved']
     assert_nil response['errors']
+
+    email_deliveries = ActionMailer::Base.deliveries
+    assert_equal 6, email_deliveries.length
+    assert(email_deliveries.any? { |email| email.to.include? @non_approved_lecture.user.email })
+    assert(email_deliveries.any? { |email| email.to.include? @member.email })
   end
 
   test '#register cannot be access when not logged in' do
