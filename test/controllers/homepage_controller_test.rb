@@ -4,10 +4,9 @@ require 'test_helper'
 
 class HomepageControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @approved_lecture = events(:approved_lecture)
-    @non_approved_lecture = events(:non_approved_lecture)
-    @admin_lecture = events(:admin_lecture)
-    @past_lecture = events(:past_lecture)
+    @approved_lecture = create(:event, approved: true)
+    @non_approved_lecture = create(:event, approved: false)
+    @past_lecture = create(:event, start_time: 2.hours.ago, end_time: 1.hour.ago)
   end
 
   test '#homepage returns an ok response' do
