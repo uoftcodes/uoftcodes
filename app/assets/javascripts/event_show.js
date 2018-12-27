@@ -112,6 +112,7 @@ function showEventModal(eventId) {
   $('#event_modal_negative_message_div').hide();
   $('#event_modal_success_message_div').hide();
   $('#event_modal_date_label').hide();
+  $('#event_modal_location_label').hide();
   $('#event_modal_actions').hide();
   $('#event_modal').modal({
     onHide: function() {
@@ -145,6 +146,11 @@ function showEventModal(eventId) {
         parseTime(data.start_time) + ' - ' + parseTime(data.end_time)
       );
       $('#event_modal_date_label').show();
+      $('#event_modal_location_label').html(
+        '<i class="map marker alternate icon"></i>' +
+        data.location
+      );
+      $('#event_modal_location_label').show();
       $('#event_modal_header').text(data.title);
       $('#event_modal_content').text(data.description);
 
@@ -153,7 +159,7 @@ function showEventModal(eventId) {
       var editEventButton = $('#edit_event_button');
       if (editEventButton) {
         editEventButton.attr('href', window.location.protocol + "//" + window.location.host +
-          '/events/' + eventId);
+          '/events/' + eventId + '/edit');
       }
 
       var approveEventButton = $('#approve_event_button');
@@ -196,6 +202,6 @@ function parseTime(t) {
   var month = months[time.getMonth()];
   var date = time.getDate();
   var hour = time.getHours();
-  var minute = time.getMinutes();
+  var minute = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes();
   return month + " " + date + ", " + year + " " + hour + ":" + minute;
 }

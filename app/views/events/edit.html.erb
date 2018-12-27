@@ -1,6 +1,9 @@
-<h1>Editing Event</h1>
+<div class="ui centered grid">
+  <div class="fourteen wide column">
+    <h1>Editing Event</h1>
 
-<%= render 'form', event: @event %>
+    <%= render 'form', event: @event %>
 
-<%= link_to 'Show', @event %> |
-<%= link_to 'Back', events_path %>
+    <%= link_to 'Back', events_path + "?eventId=#{@event.id}" %>
+  </div>
+</div>
