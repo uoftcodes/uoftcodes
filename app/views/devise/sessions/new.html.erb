@@ -1,46 +1,50 @@
 <br />
 <div class="ui centered grid">
-  <div class="column" style="max-width: 550px">
-    <h2 class="ui image header">
-      <div class="content uoftcodes-blue-text">
-        Login to your account
-      </div>
-    </h2>
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'ui large form' }) do |f| %>
-      <div class="ui stacked segment">
-        <div class="field">
-          <%= f.label :email %>
-          <div class="ui left icon input">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-            <i class="user icon"></i>
+  <div class="fourteen wide column">
+    <div class="ui centered grid">
+      <div class="column" style="max-width: 550px">
+        <h2 class="ui image header">
+          <div class="content uoftcodes-blue-text">
+            Login to your account
           </div>
-        </div>
-        <div class="field">
-          <%= f.label :password %>
-          <div class="ui left icon input">
-            <%= f.password_field :password, autocomplete: "current-password" %>
-            <i class="lock icon"></i>
-          </div>
-        </div>
-        <% if devise_mapping.rememberable? -%>
-          <div class="field">
-            <div class="ui checkbox">
-              <%= f.check_box :remember_me, type: 'checkbox' %>
-              <%= f.label :remember_me %>
+        </h2>
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'ui large form' }) do |f| %>
+          <div class="ui stacked segment">
+            <div class="field">
+              <%= f.label :email %>
+              <div class="ui left icon input">
+                <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+                <i class="user icon"></i>
+              </div>
+            </div>
+            <div class="field">
+              <%= f.label :password %>
+              <div class="ui left icon input">
+                <%= f.password_field :password, autocomplete: "current-password" %>
+                <i class="lock icon"></i>
+              </div>
+            </div>
+            <% if devise_mapping.rememberable? -%>
+              <div class="field">
+                <div class="ui checkbox">
+                  <%= f.check_box :remember_me, type: 'checkbox' %>
+                  <%= f.label :remember_me %>
+                </div>
+              </div>
+            <% end %>
+            <%= f.submit "Login", class: 'ui uoftcodes-blue-background fluid large submit button' %>
+            <div class="field">
+              <%= link_to '/users/password/new' do %>I forgot my password<% end %>
             </div>
           </div>
         <% end %>
-        <%= f.submit "Login", class: 'ui uoftcodes-blue-background fluid large submit button' %>
-        <div class="field">
-          <%= link_to '/users/password/new' do %>I forgot my password<% end %>
+        <div class="ui message">
+          <%= link_to '/users/sign_up', class: '' do %>
+            <i class="signup icon"></i>
+            Sign up
+          <% end %>
         </div>
       </div>
-    <% end %>
-    <div class="ui message">
-      <%= link_to '/users/sign_up', class: '' do %>
-        <i class="signup icon"></i>
-        Sign up
-      <% end %>
     </div>
   </div>
 </div>
