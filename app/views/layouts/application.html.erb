@@ -24,18 +24,20 @@
 
     <div style="padding: 0 8px 0 8px">
       <% flash.each do |type, msg| %>
-        <% if type == "notice" %>
-          <div class="ui info message">
-        <% elsif type == "alert" %>
-          <div class="ui negative message">
-        <% else %>
-          <div class="ui info message">
-        <% end %>
-          <i class="close icon" onclick="closeMessage(this);"></i>
-          <div class="header">
-              <%= msg %>
+        <% unless msg.blank? %>
+          <% if type == "notice" %>
+            <div class="ui info message">
+          <% elsif type == "alert" %>
+            <div class="ui negative message">
+          <% else %>
+            <div class="ui info message">
+          <% end %>
+            <i class="close icon" onclick="closeMessage(this);"></i>
+            <div class="header">
+                <%= msg %>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
 
