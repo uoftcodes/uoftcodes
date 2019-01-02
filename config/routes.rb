@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  get 'google7ff550f496a80e1e.html', to: proc { |_env|
+    [200, {}, ['google-site-verification: google7ff550f496a80e1e.html']]
+  }
+
   get 'events/archived', to: 'events#archived_index'
   resources :events do
     post 'approve', action: :approve
