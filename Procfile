@@ -1,3 +1,2 @@
-web: bin/rails server -p $PORT -e $RAILS_ENV
+web: bin/rails server -p $PORT -e $RAILS_ENV & bundle exec sidekiq & wait -n
 release: rake db:migrate
-job: bundle exec sidekiq
